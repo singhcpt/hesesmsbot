@@ -7,8 +7,12 @@ class Utilities:
 
     @staticmethod
     def parseCoordinatesFromLink(locationLink):
-        #write code here
-        return [-1,-1]
+        i = locationLink.find("(")
+        j = locationLink.find(",")
+        k = locationLink.find(")")
+        latitude = float(locationLink[i+1:j])
+        longitude = float(locationLink[j+1:k])
+        return [latitude, longitude]
 
     @staticmethod
     def cleanLists():

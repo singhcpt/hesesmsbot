@@ -29,6 +29,8 @@ def processCommand(commandStr, user):
 def processByState(inputStr, user):
     if(user.getCmdState() == CommandState.Setup):
         return setup(inputStr, user)
+    if(user.getCmdState() == CommandState.Reporting):
+        return report(inputStr, user)
     return "Unimplemented"
 
 def processText(inputStr, number):

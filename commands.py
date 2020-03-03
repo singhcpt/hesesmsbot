@@ -8,6 +8,7 @@ def setup(inputStr, user):
     if(user == None):
         newUser = User()
         newUser.updateCmdState(CommandState.Setup)
+        newUser.setCmdSubState(0)
         newUser.number = int(inputStr)
         users[int(inputStr)] = newUser
         return NEW_USER_MESSAGE
@@ -34,16 +35,18 @@ def setup(inputStr, user):
 def report(inputStr, user):
     if(user.getCmdState() != CommandState.Reporting):
         user.updateCmdState(CommandState.Reporting)
+        user.setCmdSubState(0)
         return REPORT_MESSAGE1
     elif(user.getCmdSubState() == 0):
+        user.cache.append(list())
         if("1" in inputStr):
-            user.cache.append(EventType.Sales)
+            user.cache[0].append(EventType.Sales)
         elif("2" in inputStr):
-            user.cache.append(EventType.Social)
+            user.cache[0].append(EventType.Social)
         elif("3" in inputStr):
-            user.cache.append(EventType.Criminal)
+            user.cache[0].append(EventType.Criminal)
         elif("4" in inputStr):
-            user.cache.append(EventType.Political)
+            user.cache[0].append(EventType.Political)
         user.setCmdSubState(1)
         return REPORT_MESSAGE2
     elif(user.getCmdSubState() == 1):
@@ -61,7 +64,9 @@ def report(inputStr, user):
         return REPORT_MESSAGE4
     elif(user.getCmdSubState() == 3):
         user.cache.append(inputStr)
-        newEvent = event(user.cache[0],user.cache[1],user.cache[2], user.cache[3])
+        newEvent = Event(user.cache[0],user.cache[1],user.cache[2], user.cache[3])
+        events[newEvent.eventId] = newEvent;
+        user.cache.clear()
         user.updateCmdState(CommandState.Default)
         return REPORT_MESSAGE5
     return "State out of Range Error (probably stale state)"
