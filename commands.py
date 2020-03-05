@@ -38,15 +38,16 @@ def report(inputStr, user):
         user.setCmdSubState(0)
         return REPORT_MESSAGE1
     elif(user.getCmdSubState() == 0):
-        user.cache.append(list())
         if("1" in inputStr):
-            user.cache[0].append(EventType.Sales)
+            user.cache.append(EventType.Sales)
         elif("2" in inputStr):
-            user.cache[0].append(EventType.Social)
+            user.cache.append(EventType.Social)
         elif("3" in inputStr):
-            user.cache[0].append(EventType.Criminal)
+            user.cache.append(EventType.Criminal)
         elif("4" in inputStr):
-            user.cache[0].append(EventType.Political)
+            user.cache.append(EventType.Political)
+        else:
+            user.cache.append(-1)
         user.setCmdSubState(1)
         return REPORT_MESSAGE2
     elif(user.getCmdSubState() == 1):
@@ -64,23 +65,35 @@ def report(inputStr, user):
         return REPORT_MESSAGE4
     elif(user.getCmdSubState() == 3):
         user.cache.append(inputStr)
-        newEvent = Event(user.cache[0],user.cache[1],user.cache[2], user.cache[3])
+        newEvent = Event(user.cache[0],user.cache[1],user.cache[3], user.cache[2], time.time())
         events[newEvent.eventId] = newEvent;
-        user.cache.clear()
         user.updateCmdState(CommandState.Default)
         return REPORT_MESSAGE5
     return "State out of Range Error (probably stale state)"
     
         
-def ls(arguments):
-    args = arguments.split(",")#could use "  " as delimeter if it is easier
-    length = len(args)
-    if(args[0] != ''):
-        return "list has the incorrect number of arguments"
-    out = ""
-    for evt in events:
-        out += evt[0] + " at " + evt[1] + "\n"
-    return out
+def ls(inputStr, user):
+    if(user.getCmdState() != CommandState.Browsing):
+        user.updateCmdState(CommandState.Browsing)
+        user.setCmdSubState(0)
+        return LIST_MESSAGE1        
+    elif(user.getCmdSubState() == 0):
+        eType = -1
+        if("1" in inputStr):
+            eType = EventType.Sales
+        elif("2" in inputStr):
+            eType = EventType.Social
+        elif("3" in inputStr):
+            eType = EventType.Criminal
+        elif("4" in inputStr):
+            eType = EventType.Political
+        out = ""
+        out += LIST_MESSAGE2 + Utilities.eTypeToString[eType] + " events." #dont hardcode this -TODO
+        for i in range(len(events)):
+            if(events[i].eventType == eType):
+                out+= "\n\n(1)" + events[i].headline + "\nat " + Utilities.createLinkFromCoords(events[0].location)
+        user.updateCmdState(CommandState.Default)
+        return out
 
 def clear():
     events.clear()

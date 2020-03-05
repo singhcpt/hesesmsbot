@@ -1,9 +1,13 @@
-#in format (Thing, Where, When)
+from strings import *
+from enums import *
+
 events = dict()
 users = dict()
 unsafe = False
 
 class Utilities:
+
+    eTypeToString = {EventType.Sales: "sales", EventType.Social: "social", EventType.Criminal: "criminal", EventType.Political: "political"} 
 
     @staticmethod
     def parseCoordinatesFromLink(locationLink):
@@ -13,6 +17,11 @@ class Utilities:
         latitude = float(locationLink[i+1:j])
         longitude = float(locationLink[j+1:k])
         return [latitude, longitude]
+    @staticmethod
+    def createLinkFromCoords(coords):
+        locationString = "(" + str(coords[0]) + "," + str(coords[1]) + ")"
+        return MAPS_FORMAT_STRING + locationString
+        
 
     @staticmethod
     def cleanLists():

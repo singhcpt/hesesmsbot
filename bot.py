@@ -11,7 +11,7 @@ def isCommand(inputStr):
 
 def processCommand(commandStr, user):
     if(len(user.cache) != 0):
-        return "Cache not cleaned correctly abort program"
+        user.cache.clear()
     end = commandStr.find(" ")
     length = len(commandStr)
     if(end == -1):
@@ -22,7 +22,7 @@ def processCommand(commandStr, user):
         else:
             return report(commandStr[end+1:])
     elif(commandStr[:end].casefold() == "list" or commandStr[:end].casefold() == "l"):
-        return ls("")
+        return ls("", user)
     elif(commandStr[:end].casefold() == "clear" or commandStr[:end].casefold() == "c"):
         return clear()
 
@@ -31,6 +31,8 @@ def processByState(inputStr, user):
         return setup(inputStr, user)
     if(user.getCmdState() == CommandState.Reporting):
         return report(inputStr, user)
+    if(user.getCmdState() == CommandState.Browsing):
+        return ls(inputStr, user)
     return "Unimplemented"
 
 def processText(inputStr, number):

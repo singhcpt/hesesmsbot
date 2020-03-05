@@ -16,3 +16,9 @@ REPORT_MESSAGE3 = "Great! now send us your location by using attach and choosing
 REPORT_MESSAGE4 = "Thanks! now, optionally, you can add a short description. if you don't your report will automatically be submitted*."
 
 REPORT_MESSAGE5 = "Success! Your report has ben submitted!"
+
+LIST_MESSAGE1 = "What topic do you want to see reports about? (1)Sales, (2)Social, (3)Criminal, (4)Political."
+
+LIST_MESSAGE2 = "Here are the current reports about "
+
+MAPS_FORMAT_STRING = "http://maps.google.com/maps?f=q&q="
