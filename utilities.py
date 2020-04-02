@@ -14,6 +14,7 @@ class Utilities:
         i = locationLink.find("(")
         j = locationLink.find(",")
         k = locationLink.find(")")
+        print(i, j, k, locationLink)
         latitude = float(locationLink[i+1:j])
         longitude = float(locationLink[j+1:k])
         return [latitude, longitude]

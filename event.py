@@ -6,7 +6,7 @@ class Event:
     headline = ""
     description = ""
     time = 0.0
-    evnetType = -1
+    eventType = -1
     location = [0.0,0.0]
     
 
@@ -16,5 +16,5 @@ class Event:
         self.location = location
         self.time = time
         self.eventType = eventType
-        eventId = uuid.uuid1()
+        self.eventId = uuid.uuid1()
         

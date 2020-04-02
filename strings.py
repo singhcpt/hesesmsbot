@@ -1,4 +1,4 @@
-NEW_USER_MESSAGE = "Hello! This is the first time we have seen your number. We'll need to do some setup. Fist, What username do you want?"
+NEW_USER_MESSAGE = "Hello! This is the first time we have seen your number. We'll need to do some setup. First, What username do you want?"
 
 SETUP_MESSAGE2 = "What news would you like to know about ((1)Sales, (2)Social, (3)Criminal, (4)Political)? put commas between choices."
 
@@ -20,5 +20,7 @@ REPORT_MESSAGE5 = "Success! Your report has ben submitted!"
 LIST_MESSAGE1 = "What topic do you want to see reports about? (1)Sales, (2)Social, (3)Criminal, (4)Political."
 
 LIST_MESSAGE2 = "Here are the current reports about "
+
+LIST_MESSAGE3 = "Type the number of an event you want to know more about."
 
 MAPS_FORMAT_STRING = "http://maps.google.com/maps?f=q&q="

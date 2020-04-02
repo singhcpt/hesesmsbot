@@ -57,10 +57,11 @@ def report(inputStr, user):
         user.setCmdSubState(2)
         return REPORT_MESSAGE3
     elif(user.getCmdSubState() == 2):
-        location = Utilities.parseCoordinatesFromLink(inputStr)
-        if(location == [-1,-1]):
-            return "Location Formatting Error"
-        user.cache.append(location)
+        #for sms:
+        #location = Utilities.parseCoordinatesFromLink(inputStr)
+        #if(location == [-1,-1]):
+        #    return "Location Formatting Error"
+        #user.cache.append(location)
         user.setCmdSubState(3)
         return REPORT_MESSAGE4
     elif(user.getCmdSubState() == 3):
@@ -89,11 +90,24 @@ def ls(inputStr, user):
             eType = EventType.Political
         out = ""
         out += LIST_MESSAGE2 + Utilities.eTypeToString[eType] + " events." #dont hardcode this -TODO
-        for i in range(len(events)):
-            if(events[i].eventType == eType):
-                out+= "\n\n(1)" + events[i].headline + "\nat " + Utilities.createLinkFromCoords(events[0].location)
-        user.updateCmdState(CommandState.Default)
-        return out
+        print(events)
+        i = 1
+        for uid in events:
+            if(events[uid].eventType == eType):
+                out+= "\n\n(" + str(i) + ")" + events[uid].headline + "\nat " + Utilities.createLinkFromCoords(events[uid].location)
+                user.cache.append(events[uid])
+                i += 1                
+        user.setCmdSubState(1)
+        return out + "\n" + LIST_MESSAGE3
+    elif(user.getCmdSubState() == 1):
+        try:
+            if(int(inputStr) > len(user.cache) or int(inputStr) <= 0):
+                user.updateCmdState(CommandState.Default)
+                return ""
+            return user.cache[int(inputStr)-1].description
+        except ValueError as e:
+            user.updateCmdState(CommandState.Default)
+            return ""
 
 def clear():
     events.clear()

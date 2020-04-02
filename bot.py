@@ -43,5 +43,10 @@ def processText(inputStr, number):
     #TODO State is not changed by a Command override currently 
     return processByState(inputStr, users[number])
 
+#Whatsapp workaround
+def setLocation(lat, long, number):
+    users[number].cache.append([lat, long])
+    
+
 
     

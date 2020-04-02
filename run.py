@@ -35,6 +35,12 @@ def sms():
 
     recipients = ["+" + number]
     replyText = processText(message_body, int(number))
+    #whatsapp only
+    if(replyText == REPORT_MESSAGE4):
+        if("Latitude" in request.form.keys()):
+            setLocation(request.form.get("Latitude"), request.form.get("Longitude"), int(number))
+        else:
+            replyText = "Location Error"
     shortCode = "3256"
     
 
