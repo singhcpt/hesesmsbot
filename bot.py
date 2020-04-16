@@ -6,7 +6,7 @@ from commands import *
 #from algorithm import *
 
 def isCommand(inputStr):
-    if(len(inputStr) == 0):
+    if(inputStr == None or len(inputStr) == 0):
         return False
     return inputStr[0] == "#"
 
@@ -43,6 +43,12 @@ def processText(inputStr, number):
         return processCommand(inputStr[1:], users[number])
     #TODO State is not changed by a Command override currently 
     return processByState(inputStr, users[number])
+
+def getUserInfo():
+    return users
+
+def getEventInfo():
+    return events
 
 #Whatsapp workaround
 def setLocation(lat, long, number):
