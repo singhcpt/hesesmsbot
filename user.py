@@ -6,6 +6,7 @@ class User:
     reliability = 1
     baseLocation = [0.0,0.0]
     preferences = list()
+    verifyingEventId = -1
     __commandState = CommandState.Default
     __cmdSubState = 0
     cache = list()

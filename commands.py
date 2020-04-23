@@ -1,4 +1,5 @@
 import time
+import sys
 from user import *
 from event import *
 from strings import *
@@ -13,10 +14,16 @@ def setup(inputStr, user):
         users[int(inputStr)] = newUser
         return NEW_USER_MESSAGE
     elif(user.getCmdSubState() == 0):
-        user.initialize(inputStr, user.number)
-        user.setCmdSubState(1)
-        return SETUP_MESSAGE2
-    elif(user.getCmdSubState() == 1):
+        user.initialize("Username", user.number)
+        location = Utilities.parseCoordinatesFromLink(inputStr)
+        if(location == [-1,-1]):
+            return "Location Formatting Error"
+        user.baseLocation = location
+        user.updateCmdState(CommandState.Default)
+        return SETUP_MESSAGE3
+
+    #used in first prototype
+    """elif(user.getCmdSubState() == 1):
         choices = inputStr.split(",")
         for choice in choices:
             if("1" in choice.casefold()):
@@ -28,7 +35,8 @@ def setup(inputStr, user):
             elif("4" in choice.casefold()):
                 user.addPreference(EventType.Political)
         user.updateCmdState(CommandState.Default)
-        return SETUP_MESSAGE3
+        return SETUP_MESSAGE3"""
+
     return "State out of Range Error (probably stale state)"
     
 
@@ -39,46 +47,73 @@ def report(inputStr, user):
         return REPORT_MESSAGE1
     elif(user.getCmdSubState() == 0):
         if("1" in inputStr):
-            user.cache.append(EventType.Sales)
+            user.cache.append(WeatherType.Sunny)
         elif("2" in inputStr):
-            user.cache.append(EventType.Social)
+            user.cache.append(WeatherType.Partly_Cloudy)
         elif("3" in inputStr):
-            user.cache.append(EventType.Criminal)
+            user.cache.append(WeatherType.Mostly_Cloudy)
         elif("4" in inputStr):
-            user.cache.append(EventType.Political)
+            user.cache.append(WeatherType.Cloudy)
+        elif("5" in inputStr):
+            user.cache.append(WeatherType.Rainy)
+        elif("6" in inputStr):
+            user.cache.append(WeatherType.Storming)
+        elif("7" in inputStr):
+            user.cache.append(WeatherType.Windy)
+        elif("8" in inputStr):
+            user.cache.append(WeatherType.Emergency)
         else:
-            user.cache.append(-1)
+            return "you must choose one."
         user.setCmdSubState(1)
         return REPORT_MESSAGE2
     elif(user.getCmdSubState() == 1):
-        if(len(inputStr.split(" ")) > 5):
+        if(len(inputStr) > 100):
             return REPORT_ERROR1
-        user.cache.append(inputStr)
-        user.setCmdSubState(2)
-        return REPORT_MESSAGE3
-    elif(user.getCmdSubState() == 2):
+        if(len(inputStr) == 1 and "0" in inputStr):
+            user.cache.append("")
+        else:
+            user.cache.append(inputStr)
+        newEvent = Event(user.cache[0],user.cache[1], user.baseLocation, time.time())
+        events[newEvent.eventId] = newEvent
+        trigger.set()
+        user.updateCmdState(CommandState.Default)
+        return REPORT_MESSAGE5
+    
+    #used in first prototype
+    """elif(user.getCmdSubState() == 2):
         #for sms:
-        #location = Utilities.parseCoordinatesFromLink(inputStr)
-        #if(location == [-1,-1]):
-        #    return "Location Formatting Error"
-        #user.cache.append(location)
+        location = Utilities.parseCoordinatesFromLink(inputStr)
+        if(location == [-1,-1]):
+            return "Location Formatting Error"
+        user.cache.append(location)
         user.setCmdSubState(3)
         return REPORT_MESSAGE4
     elif(user.getCmdSubState() == 3):
         user.cache.append(inputStr)
         newEvent = Event(user.cache[0],user.cache[1],user.cache[3], user.cache[2], time.time())
         events[newEvent.eventId] = newEvent;
+        trigger.set()
         user.updateCmdState(CommandState.Default)
-        return REPORT_MESSAGE5
+        return REPORT_MESSAGE5"""
+
     return "State out of Range Error (probably stale state)"
     
         
 def ls(inputStr, user):
     if(user.getCmdState() != CommandState.Browsing):
-        user.updateCmdState(CommandState.Browsing)
-        user.setCmdSubState(0)
-        return LIST_MESSAGE1        
-    elif(user.getCmdSubState() == 0):
+        shortest = sys.maxsize
+        closestEvent = None
+        for event in events.values():
+            eventDist = Utilities.calculateDistance(event.location, user.baseLocation)
+            if(eventDist < shortest):
+                shortest = eventDist
+                closestEvent = event
+        if(closestEvent is None):
+            return "No Weather Reported"
+        
+        return LIST_MESSAGE2 + "\n\n" + weatherStrings[closestEvent.weatherType] + "\nDescription:\n" + closestEvent.description + "\nReport Location: " + Utilities.createLinkFromCoords(closestEvent.location) + "\n" + closestEvent.verificationString() 
+
+    """elif(user.getCmdSubState() == 0):
         eType = -1
         if("1" in inputStr):
             eType = EventType.Sales
@@ -107,7 +142,18 @@ def ls(inputStr, user):
             return user.cache[int(inputStr)-1].description
         except ValueError as e:
             user.updateCmdState(CommandState.Default)
-            return ""
+            return "";"""
+    return "State out of Range Error (probably stale state)"
+
+def verify(inputStr, user):
+    verdict = False
+    if("1" in inputStr):
+        verdict = True
+    ver = verification(user.number, verdict)
+    event = events[user.cache[0]]
+    event.verifications.append(ver)
+    return VERIFY_MESSAGE
+
 
 def clear():
     events.clear()

@@ -34,6 +34,8 @@ def processByState(inputStr, user):
         return report(inputStr, user)
     if(user.getCmdState() == CommandState.Browsing):
         return ls(inputStr, user)
+    if(user.getCmdState() == CommandState.Verifying):
+        return verify(inputStr, user)
     return "Unimplemented"
 
 def processText(inputStr, number):
@@ -43,12 +45,6 @@ def processText(inputStr, number):
         return processCommand(inputStr[1:], users[number])
     #TODO State is not changed by a Command override currently 
     return processByState(inputStr, users[number])
-
-def getUserInfo():
-    return users
-
-def getEventInfo():
-    return events
 
 #Whatsapp workaround
 def setLocation(lat, long, number):

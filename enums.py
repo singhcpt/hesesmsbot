@@ -1,10 +1,11 @@
 import enum
-class EventType(enum.Enum):
+#used in first prototype
+"""class EventType(enum.Enum):
     #These will probably need to be changed
     Sales = 1
     Social = 2
     Criminal = 3
-    Political = 4
+    Political = 4"""
 
 class CommandState(enum.Enum):
     Default = 1
@@ -12,4 +13,23 @@ class CommandState(enum.Enum):
     Reporting = 3
     Verifying = 4
     Browsing = 5
+
+class WeatherType(enum.Enum):
+    Sunny = 1
+    Partly_Cloudy = 2
+    Mostly_Cloudy = 3
+    Cloudy = 4
+    Rainy = 5
+    Storming = 6    
+    Windy = 7
+    Emergency = 8
+
+weatherStrings = {WeatherType.Sunny : "Sunny",
+ WeatherType.Partly_Cloudy : "Partly Cloudy",
+ WeatherType.Mostly_Cloudy : "Mostly Cloudy",
+ WeatherType.Cloudy : "Cloudy",
+ WeatherType.Rainy : "Rainy",
+ WeatherType.Storming : "Storm",
+ WeatherType.Windy : "Windy",
+ WeatherType.Emergency : "Emergency"}
     
