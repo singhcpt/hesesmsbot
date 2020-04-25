@@ -1,0 +1,7 @@
+{
+  "user": "user",
+  "password": "pass",
+  "host": "localhost",
+  "database": "chirpdb",
+  "port": 3306
+}
