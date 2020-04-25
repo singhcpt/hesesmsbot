@@ -30,7 +30,7 @@ def create_user(user):
     return  "User " + str(user) + " created successfully."
 
 def create_event(event):
-    eventCnx = create_connection();
+    eventCnx = create_connection()
     cursor = eventCnx.cursor()
     
     create_event = "INSERT INTO Events (headline, description, timestamp, event_type, latitude, longitude) \
