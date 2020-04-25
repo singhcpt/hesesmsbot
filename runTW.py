@@ -43,7 +43,7 @@ def sms():
 
 def validate():
     account_sid = 'AC50b76a11d713b405f2c1f4d120ed0d5e'
-    auth_token = '52701a2601cc82db17acb5b9b2cd6432'
+    auth_token = 'ecd8ce0fe6da6f870c0ba586339e541d'
     client = Client(account_sid, auth_token)
 
     while(trigger.wait()):
@@ -57,8 +57,7 @@ def validate():
             if(user.number not in recentEvent.numsVerified()  or ((user.baseLocation[0]-recentEvent.location[0])**2 + (user.baseLocation[1]-recentEvent.location[1])**2)**.5 < 0.00101035615 and user.verifyingEventId == -1):
                 msg = VALIDATE_MESSAGE + "\n\n" + weatherStrings[recentEvent.weatherType] + "\n" + recentEvent.description + "\nReport Location: " + Utilities.createLinkFromCoords(recentEvent.location)
                 message = client.messages.create(body=msg, from_="+18604847971", to="+" + str(user.number))
-                user.cache.clear()
-                user.cache.append(recentEvent.eventId)
+                user.cache.eventId = recentEvent.eventId
                 user.updateCmdState(CommandState.Verifying)
                 user.verifyingEventId = recentEvent.eventId
 

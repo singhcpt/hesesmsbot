@@ -11,8 +11,6 @@ def isCommand(inputStr):
     return inputStr[0] == "#"
 
 def processCommand(commandStr, user):
-    if(len(user.cache) != 0):
-        user.cache.clear()
     end = commandStr.find(" ")
     length = len(commandStr)
     if(end == -1):

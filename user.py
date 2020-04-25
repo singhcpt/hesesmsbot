@@ -1,19 +1,18 @@
 from enums import *
+from cache import *
 
 class User:
-    name = ""
-    number = 0
-    reliability = 1
-    baseLocation = [0.0,0.0]
-    preferences = list()
-    verifyingEventId = -1
-    __commandState = CommandState.Default
-    __cmdSubState = 0
-    cache = list()
 
-    def initialize(self, name, number):
-        self.name = name
+    def __init__(self, number):
+        self.name = ""
         self.number = number
+        self.reliability = 1
+        self.baseLocation = [0.0,0.0]
+        self.preferences = list()
+        self.verifyingEventId = -1
+        self.__commandState = CommandState.Default
+        self.__cmdSubState = 0
+        self.cache = Cache()
 
     def addPreference(self, addition):
         self.preferences.append(addition)

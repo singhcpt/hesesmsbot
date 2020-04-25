@@ -7,14 +7,12 @@ from utilities import *
 
 def setup(inputStr, user):
     if(user == None):
-        newUser = User()
+        newUser = User(int(inputStr))
         newUser.updateCmdState(CommandState.Setup)
         newUser.setCmdSubState(0)
-        newUser.number = int(inputStr)
         users[int(inputStr)] = newUser
         return NEW_USER_MESSAGE
     elif(user.getCmdSubState() == 0):
-        user.initialize("Username", user.number)
         location = Utilities.parseCoordinatesFromLink(inputStr)
         if(location == [-1,-1]):
             return "Location Formatting Error"
@@ -47,21 +45,21 @@ def report(inputStr, user):
         return REPORT_MESSAGE1
     elif(user.getCmdSubState() == 0):
         if("1" in inputStr):
-            user.cache.append(WeatherType.Sunny)
+            user.cache.weatherType = WeatherType.Sunny
         elif("2" in inputStr):
-            user.cache.append(WeatherType.Partly_Cloudy)
+            user.cache.weatherType = WeatherType.Partly_Cloudy
         elif("3" in inputStr):
-            user.cache.append(WeatherType.Mostly_Cloudy)
+            user.cache.weatherType = WeatherType.Mostly_Cloudy
         elif("4" in inputStr):
-            user.cache.append(WeatherType.Cloudy)
+            user.cache.weatherType = WeatherType.Cloudy
         elif("5" in inputStr):
-            user.cache.append(WeatherType.Rainy)
+            user.cache.weatherType = WeatherType.Rainy
         elif("6" in inputStr):
-            user.cache.append(WeatherType.Storming)
+            user.cache.weatherType = WeatherType.Storming
         elif("7" in inputStr):
-            user.cache.append(WeatherType.Windy)
+            user.cache.weatherType = WeatherType.Windy
         elif("8" in inputStr):
-            user.cache.append(WeatherType.Emergency)
+            user.cache.weatherType = WeatherType.Emergency
         else:
             return "you must choose one."
         user.setCmdSubState(1)
@@ -70,10 +68,10 @@ def report(inputStr, user):
         if(len(inputStr) > 100):
             return REPORT_ERROR1
         if(len(inputStr) == 1 and "0" in inputStr):
-            user.cache.append("")
+            user.cache.description = ""
         else:
-            user.cache.append(inputStr)
-        newEvent = Event(user.cache[0],user.cache[1], user.baseLocation, time.time())
+            user.cache.description = inputStr
+        newEvent = Event(user.cache.weatherType, user.cache.description, user.baseLocation, time.time())
         events[newEvent.eventId] = newEvent
         trigger.set()
         user.updateCmdState(CommandState.Default)
@@ -150,7 +148,7 @@ def verify(inputStr, user):
     if("1" in inputStr):
         verdict = True
     ver = verification(user.number, verdict)
-    event = events[user.cache[0]]
+    event = events[user.cache.eventId]
     event.verifications.append(ver)
     return VERIFY_MESSAGE
 

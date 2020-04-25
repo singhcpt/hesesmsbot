@@ -1,24 +1,17 @@
 import uuid
 import time
 
-class Event:
-    eventId = 0
-    #headline = ""
-    description = ""
-    time = 0.0
-    #eventType = -1
-    weatherType = -1
-    location = [0.0,0.0]
-    verifications = list()
-    
+class Event:   
 
     def __init__(self, weatherType, description, location, time):
         #self.headline = headline
+        #self.eventType = eventType
         self.description = description
         self.location = location
         self.time = time
         self.weatherType = weatherType
         self.eventId = uuid.uuid1()
+        self.verifications = list()
 
     def numsVerified(self):
         nums = list()
