@@ -1,6 +1,6 @@
 {
   "user": "user",
-  "password": "pass",
+  "password": "chirpbloom",
   "host": "localhost",
   "database": "chirpdb",
   "port": 3306

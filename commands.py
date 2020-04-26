@@ -4,6 +4,7 @@ from user import *
 from event import *
 from strings import *
 from utilities import *
+from chirpdataservices import *
 
 def setup(inputStr, user):
     if(user == None):
@@ -71,8 +72,8 @@ def report(inputStr, user):
             user.cache.description = ""
         else:
             user.cache.description = inputStr
-        newEvent = Event(user.cache.weatherType, user.cache.description, user.baseLocation, time.time())
-        events[newEvent.eventId] = newEvent
+        newEvent = Event(1, user.cache.weatherType, user.cache.description, user.baseLocation, str(datetime.now())[:-7])
+        create_event(newEvent)
         trigger.set()
         user.updateCmdState(CommandState.Default)
         return REPORT_MESSAGE5
@@ -101,6 +102,7 @@ def ls(inputStr, user):
     if(user.getCmdState() != CommandState.Browsing):
         shortest = sys.maxsize
         closestEvent = None
+        events = get_events()
         for event in events.values():
             eventDist = Utilities.calculateDistance(event.location, user.baseLocation)
             if(eventDist < shortest):
@@ -109,7 +111,7 @@ def ls(inputStr, user):
         if(closestEvent is None):
             return "No Weather Reported"
         
-        return LIST_MESSAGE2 + "\n\n" + weatherStrings[closestEvent.weatherType] + "\nDescription:\n" + closestEvent.description + "\nReport Location: " + Utilities.createLinkFromCoords(closestEvent.location) + "\n" + closestEvent.verificationString() 
+        return LIST_MESSAGE2 + "\n\n" + str(closestEvent.weatherType) + "\nDescription:\n" + closestEvent.description + "\nReport Location: " + Utilities.createLinkFromCoords(closestEvent.location) + "\n" + closestEvent.verificationString() 
 
     """elif(user.getCmdSubState() == 0):
         eType = -1
@@ -148,11 +150,8 @@ def verify(inputStr, user):
     if("1" in inputStr):
         verdict = True
     ver = verification(user.number, verdict)
+    events = get_events()
     event = events[user.cache.eventId]
-    event.verifications.append(ver)
+    create_verification(event.eventId, user.number, ver)
     return VERIFY_MESSAGE
 
-
-def clear():
-    events.clear()
-    return "Cleared!"

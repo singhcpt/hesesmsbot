@@ -24,12 +24,4 @@ class WeatherType(enum.Enum):
     Windy = 7
     Emergency = 8
 
-weatherStrings = {WeatherType.Sunny : "Sunny",
- WeatherType.Partly_Cloudy : "Partly Cloudy",
- WeatherType.Mostly_Cloudy : "Mostly Cloudy",
- WeatherType.Cloudy : "Cloudy",
- WeatherType.Rainy : "Rainy",
- WeatherType.Storming : "Storm",
- WeatherType.Windy : "Windy",
- WeatherType.Emergency : "Emergency"}
     

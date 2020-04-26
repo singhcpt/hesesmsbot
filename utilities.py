@@ -3,7 +3,7 @@ from enums import *
 import threading
 
 trigger = threading.Event()
-events = dict()
+#events = dict()
 users = dict()
 unsafe = False
 

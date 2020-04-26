@@ -1,4 +1,5 @@
 from enums import *
+from utilities import Verification
 from event import Event
 from datetime import datetime, timedelta
 import mysql.connector
@@ -30,12 +31,11 @@ def create_user(user):
     return  "User " + str(user) + " created successfully."
 
 def create_event(event):
-    eventCnx = create_connection()
+    eventCnx = create_connection();
     cursor = eventCnx.cursor()
     
-    create_event = "INSERT INTO Events (headline, description, timestamp, event_type, latitude, longitude) \
-        VALUES (\'" + event.headline + "\',\'" + event.description + "\',\'" + event.time + "\'," + \
-            str(event.eventType) + "," + str(event.location[0]) + "," + str(event.location[1]) + ");"
+    create_event = "INSERT INTO Events (weatherType, description, latitude, longitude, timestamp) \
+        VALUES (" + str(event.weatherType.value) + ",\'" + event.description + "\',"  + str(event.location[0]) + "," + str(event.location[1]) + ",\'"  + event.time + "\');"
 
     cursor.execute(create_event)
     
@@ -53,10 +53,10 @@ def get_events():
     get_event = "SELECT * FROM Events WHERE timestamp >= " + "\'" + last_hour_timestamp + "\;'"
     cursor.execute(get_event)
 
-    events = []
-    for (event_id, headline, description, timestamp, event_type, latitude, longitude) in cursor:
-        newEvent = Event(event_id, headline, description, timestamp, event_type, [latitude, longitude])
-        events.append(newEvent)
+    events = dict()
+    for (event_id, weatherType, description, latitude, longitude, timestamp) in cursor:
+        newEvent = Event(event_id, weatherType, description, [latitude, longitude], timestamp)
+        events[event_id] = newEvent
     
     eventCnx.close()
     
@@ -76,4 +76,3 @@ def create_verification(event_id, user_id, verified):
 
     return "Verification for event " + str(event_id) + " created successfully"
 
-create_verification(2000000, 1000004, False)
