@@ -62,5 +62,18 @@ def get_events():
     
     return events
 
+def create_verification(event_id, user_id, verified):
+    verificationCnx = create_connection()
+    cursor = verificationCnx.cursor()
 
+    create_verification = "INSERT INTO Verifications (event_id, user_id, verified) VALUES (" + str(event_id) + ", " \
+        + str(user_id) + ", " +  str(verified) + ");"
+    
+    cursor.execute(create_verification)
+    
+    verificationCnx.commit()
+    verificationCnx.close()
 
+    return "Verification for event " + str(event_id) + " created successfully"
+
+create_verification(2000000, 1000004, False)
