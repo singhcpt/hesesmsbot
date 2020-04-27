@@ -94,7 +94,7 @@ def get_verifications(event_id):
     verificationCnx = create_connection()
     cursor = verificationCnx.cursor()
 
-    get_verifications = "SELECT FROM Verifications (event_id, user_id, verified) WHERE event_id = " + str(event_id) + ";"
+    get_verifications = "SELECT (event_id, user_id, verified) FROM Verifications WHERE event_id = " + str(event_id) + ";"
 
     cursor.execute(get_verifications)
 
@@ -112,7 +112,7 @@ def get_users_verified(event_id):
     verificationCnx = create_connection()
     cursor = verificationCnx.cursor()
 
-    get_verifications = "SELECT FROM Verifications (user_id) WHERE event_id = " + str(event_id) + ";"
+    get_verifications = "SELECT (user_id) FROM Verifications WHERE event_id = " + str(event_id) + ";"
 
     cursor.execute(get_verifications)
 
