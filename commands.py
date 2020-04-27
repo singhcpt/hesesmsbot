@@ -150,9 +150,8 @@ def verify(inputStr, user):
     verdict = False
     if("1" in inputStr):
         verdict = True
-    ver = verification(user.number, verdict)
     events = get_events()
     event = events[user.cache.eventId]
-    create_verification(event.eventId, user.number, ver)
+    create_verification(event.eventId, user.number, verdict)
     return VERIFY_MESSAGE
 
