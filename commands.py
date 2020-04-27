@@ -112,7 +112,7 @@ def ls(inputStr, user):
             return "No Weather Reported"
         verifications = get_verifications(closestEvent.eventId)
         
-        return LIST_MESSAGE2 + "\n\n" + str(WeatherType(closestEvent.weatherType))[11:] + "\nDescription:\n" + closestEvent.description + "\nReport Location: " + Utilities.createLinkFromCoords(closestEvent.location) + "\n" + Utilities.verificationString(verifications) 
+        return LIST_MESSAGE2 + "\n\n" + str(WeatherType(closestEvent.weatherType))[12:] + "\nDescription:\n" + closestEvent.description + "\nReport Location: " + Utilities.createLinkFromCoords(closestEvent.location) + "\n" + Utilities.verificationString(verifications) 
 
     """elif(user.getCmdSubState() == 0):
         eType = -1
