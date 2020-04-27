@@ -103,7 +103,6 @@ def get_verifications(event_id):
         ver = Verification(user_id, verified)
         verifications.append(ver)
 
-    verificationCnx.commit()
     verificationCnx.close()
 
     return verifications
@@ -120,7 +119,6 @@ def get_users_verified(event_id):
     for(user_id) in cursor:
         users.append(user_id)
 
-    verificationCnx.commit()
     verificationCnx.close()
 
     return users

@@ -51,7 +51,7 @@ class Utilities:
         
 
 
-class verification:
+class Verification:
     userNum = None
     verdict = False
 
