@@ -96,6 +96,8 @@ def get_verifications(event_id):
 
     get_verifications = "SELECT (event_id, user_id, verified) FROM Verifications WHERE event_id = " + str(event_id) + ";"
 
+    print(get_verifications)
+
     cursor.execute(get_verifications)
 
     verifications = list()
