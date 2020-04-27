@@ -33,10 +33,9 @@ CREATE TABLE Verifications
 (
     verification_id int NOT NULL,
     event_id int NOT NULL,
-    user_id int NOT NULL,
+    user_id BIGINT NOT NULL,
     verified bool NOT NULL,
-    FOREIGN KEY (event_id) REFERENCES Events(event_id),
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+    FOREIGN KEY (event_id) REFERENCES Events(event_id)
 );
 
 ALTER TABLE Verifications MODIFY COLUMN verification_id int AUTO_INCREMENT PRIMARY KEY;
