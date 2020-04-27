@@ -20,10 +20,10 @@ CREATE TABLE Users
 (
     user_id           int NOT NULL,
     username          VARCHAR(255),
+    phone_number      int NOT NULL,
     reliability_score FLOAT,
     base_latitude     FLOAT,
-    base_longitude    FLOAT,
-    preferences       int
+    base_longitude    FLOAT
 );
 
 ALTER TABLE Users MODIFY COLUMN user_id int AUTO_INCREMENT PRIMARY KEY;

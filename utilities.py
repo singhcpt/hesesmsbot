@@ -38,6 +38,16 @@ class Utilities:
     @staticmethod
     def calculateDistance(loc1, loc2):
         return ((loc1[0]-loc2[0])**2 + (loc1[1]-loc2[1])**2)**.5
+
+    @staticmethod
+    def verificationString(verifications):
+        confirmations = 0
+        for ver in verifications:
+            if(ver.verdict):
+                confirmations += 1
+        if(len(verifications) == 0):
+            return ""
+        return "Certainty: " + str(confirmations*100/len(verifications)) + "% with " + str(confirmations) + " verification(s)"
         
 
 

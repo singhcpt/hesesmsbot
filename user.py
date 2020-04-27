@@ -3,12 +3,12 @@ from cache import *
 
 class User:
 
-    def __init__(self, number):
+    def __init__(self, number, name = "", baseLocation = [0.0], reliability = 1):
         self.name = ""
         self.number = number
         self.reliability = 1
         self.baseLocation = [0.0,0.0]
-        self.preferences = list()
+        #self.preferences = list()
         self.verifyingEventId = -1
         self.__commandState = CommandState.Default
         self.__cmdSubState = 0
