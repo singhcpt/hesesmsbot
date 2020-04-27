@@ -5,12 +5,12 @@ USE DATABASE chirpdb;
 CREATE TABLE Events
 (
     event_id    int NOT NULL,
-    headline    VARCHAR(255),
+    weather_type int,
     description VARCHAR(255),
-    timestamp        DATETIME,
-    event_type  int,
     latitude    FLOAT,
-    longitude   FLOAT
+    longitude   FLOAT,
+    timestamp        DATETIME
+    
 );
  
 ALTER TABLE Events MODIFY COLUMN event_id int AUTO_INCREMENT PRIMARY KEY;
