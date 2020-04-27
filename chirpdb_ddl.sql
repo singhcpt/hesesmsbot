@@ -1,6 +1,6 @@
 CREATE DATABASE chirpdb;
 
-USE DATABASE chirpdb;
+USE chirpdb;
 
 CREATE TABLE Events
 (
