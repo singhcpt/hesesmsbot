@@ -5,7 +5,7 @@ USE DATABASE chirpdb;
 CREATE TABLE Events
 (
     event_id    int NOT NULL,
-    weather_type int,
+    weatherType int,
     description VARCHAR(255),
     latitude    FLOAT,
     longitude   FLOAT,
