@@ -43,7 +43,7 @@ def sms():
 
 def validate():
     account_sid = 'AC50b76a11d713b405f2c1f4d120ed0d5e'
-    auth_token = 'f1f2e897c532506f9333ea3160e5eefe'
+    auth_token = '216f6cf46184c4888234573c552ca821'
     client = Client(account_sid, auth_token)
 
     while(trigger.wait()):
