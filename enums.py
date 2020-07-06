@@ -9,7 +9,7 @@ class EventType(enum.Enum):
 class CommandState(enum.Enum):
     Default = 1
     Setup = 2
-    Reporting = 3
+    Posting = 3
     Verifying = 4
     Browsing = 5
     

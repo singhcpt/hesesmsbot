@@ -1,26 +1,29 @@
-NEW_USER_MESSAGE = "Hello! This is the first time we have seen your number. We'll need to do some setup. First, What username do you want?"
+NEW_USER_MESSAGE = "Hello! This is the first time we have seen your number. We'll need to do some setup. First, what is your name?"
 
-SETUP_MESSAGE2 = "What news would you like to know about ((1)Sales, (2)Social, (3)Criminal, (4)Political)? put commas between choices."
+SETUP_MESSAGE2 = "Are you a buyer or a seller? Respond with 1 for buyer, 2 for seller."
 
-SETUP_MESSAGE3 = "Thank you! You're all set up"
+SETUP_ERRORMESSAGE2 = "Please respond with 1 or 2."
 
-REPORT_MESSAGE1 = "What topic are you reporting on? (1)Sales, (2)Social, (3)Criminal, (4)Political."
+SETUP_MESSAGE3 = "What county are you located in?"
 
-REPORT_MESSAGE2 = "In 5 words or less what is happening?"
+SETUP_MESSAGE4 = "Thank you! You're all set up. If you want to buy produce, text #BUY, if you'd like to sell produce text #SELL."
 
-REPORT_ERROR1 = "5 words or less please."
+REPORT_MESSAGE1 = "What crop are you selling?"
 
-REPORT_MESSAGE3 = "Great! now send us your location by using attach and choosing location"
+REPORT_MESSAGE2 = "How many kilograms of your crop are you selling?"
 
-#* automatic submission not yet supported - TODO
-REPORT_MESSAGE4 = "Thanks! now, optionally, you can add a short description. if you don't your report will automatically be submitted*."
+REPORT_MESSAGE3 = "Where are you located?"
 
-REPORT_MESSAGE5 = "Success! Your report has ben submitted!"
+REPORT_MESSAGE4 = "What is the price of your crops?"
 
-LIST_MESSAGE1 = "What topic do you want to see reports about? (1)Sales, (2)Social, (3)Criminal, (4)Political."
+REPORT_MESSAGE5 = "Thanks! Your crops have been posted. We will inform you when someone has purchased your crops."
 
-LIST_MESSAGE2 = "Here are the current reports about "
+LIST_MESSAGE1 = "What crop are you looking for?"
 
-LIST_MESSAGE3 = "Type the number of an event you want to know more about."
+LIST_MESSAGE2 = "Where are you located?"
 
-MAPS_FORMAT_STRING = "http://maps.google.com/maps?f=q&q="
+LIST_MESSAGE3 = "What quantity of your crop do you want? Please list in kilograms."
+
+LIST_MESSAGE4 = "What is the maximum price you are willing to pay per kilogram in shillings?"
+
+LIST_MESSAGE5 = "These are the following posts that match your preferences. Please text the number associated with that post if you are interested in purchasing it."

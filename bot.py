@@ -3,6 +3,7 @@ import time
 from user import *
 from utilities import *
 from commands import *
+import bloomdataservices as bds
 #from algorithm import *
 
 def isCommand(inputStr):
@@ -11,18 +12,16 @@ def isCommand(inputStr):
     return inputStr[0] == "#"
 
 def processCommand(commandStr, user):
-    if(len(user.cache) != 0):
-        user.cache.clear()
     end = commandStr.find(" ")
     length = len(commandStr)
     if(end == -1):
         end = length
-    if(commandStr[:end].casefold() == "report" or commandStr[:end].casefold() == "r"):
+    if(commandStr[:end].casefold() == "sell" or commandStr[:end].casefold() == "s"):
         if(end >= length-1):
-            return report("", user)
+            return post("", user)
         else:
-            return report(commandStr[end+1:])
-    elif(commandStr[:end].casefold() == "list" or commandStr[:end].casefold() == "l"):
+            return post(commandStr[end+1:])
+    elif(commandStr[:end].casefold() == "buy" or commandStr[:end].casefold() == "b"):
         return ls("", user)
     elif(commandStr[:end].casefold() == "clear" or commandStr[:end].casefold() == "c"):
         return clear()
@@ -30,19 +29,19 @@ def processCommand(commandStr, user):
 def processByState(inputStr, user):
     if(user.getCmdState() == CommandState.Setup):
         return setup(inputStr, user)
-    if(user.getCmdState() == CommandState.Reporting):
-        return report(inputStr, user)
+    if(user.getCmdState() == CommandState.Posting):
+        return post(inputStr, user)
     if(user.getCmdState() == CommandState.Browsing):
         return ls(inputStr, user)
     return "Unimplemented"
 
 def processText(inputStr, number):
-    if(not number in users):
+    if(bds.get_user_id(number) == None):
         return setup(number, None)
     if(isCommand(inputStr)):
-        return processCommand(inputStr[1:], users[number])
+        return processCommand(inputStr[1:], bds.get_user(number))
     #TODO State is not changed by a Command override currently 
-    return processByState(inputStr, users[number])
+    return processByState(inputStr, bds.get_user(number))
 
 def getUserInfo():
     return users

@@ -1,7 +1,7 @@
 {
-  "user": "user",
-  "password": "pass",
+  "user": "root",
+  "password": "password",
   "host": "localhost",
-  "database": "chirpdb",
+  "database": "bloomdb",
   "port": 3306
 }

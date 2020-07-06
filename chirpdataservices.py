@@ -1,4 +1,5 @@
 from enums import *
+from user import User
 from event import Event
 from datetime import datetime, timedelta
 import mysql.connector
@@ -18,9 +19,9 @@ def create_user(user):
     cursor = userCnx.cursor()
     
     reliability_score = 100 # need to sub this out
-    create_user = "INSERT INTO Users (username, reliability_score, base_latitude, base_longitude, preferences) \
-        VALUES (\'" + user.name + "\'," + str(reliability_score) + "," + str(user.baseLocation[0]) \
-            + "," + str(user.baseLocation[1]) + "," + str(user.preferences) + ");"
+    create_user = "INSERT INTO Users (username, phone_number, reliability_score, base_latitude, base_longitude, preferences) \
+        VALUES (\'" + user.name + "\'," + str(user.number) + "," + str(reliability_score) + "," + str(user.baseLocation[0]) \
+            + "," + str(user.baseLocation[1]) + ");"
 
     cursor.execute(create_user)
     
@@ -28,6 +29,20 @@ def create_user(user):
     userCnx.close()
 
     return  "User " + str(user) + " created successfully."
+
+def get_user(user_id):
+    userCnx = create_connection()
+    cursor = userCnx.create_connection()
+
+    get_users = "SELECT * FROM Users WHERE user_id = " + user_id + ";" 
+
+    cursor.execute(get_users)
+
+    for (user_id, username, phone_number, reliability_score, base_latitude, base_longitude) in cursor:
+        newUser = User(user_id, username, phone_number, reliability_score, [base_latitude, base_longitude])
+    
+    userCnx.close()
+    return newUser
 
 def create_event(event):
     eventCnx = create_connection()
@@ -75,5 +90,3 @@ def create_verification(event_id, user_id, verified):
     verificationCnx.close()
 
     return "Verification for event " + str(event_id) + " created successfully"
-
-create_verification(2000000, 1000004, False)
