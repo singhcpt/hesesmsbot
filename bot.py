@@ -33,7 +33,7 @@ def processByState(inputStr, user):
         return post(inputStr, user)
     if(user.getCmdState() == CommandState.Browsing):
         return ls(inputStr, user)
-    return "Unimplemented"
+    return "Text #BUY or #SELL to buy or sell produce."
 
 def processText(inputStr, number):
     if(bds.get_user_id(number) == None):
