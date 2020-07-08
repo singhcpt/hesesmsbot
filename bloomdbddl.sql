@@ -1,6 +1,6 @@
-CREATE DATABASE bloomdb;
+CREATE DATABASE bloomdb1;
 
-USE bloomdb;
+USE bloomdb1;
 
 CREATE TABLE users
 (
@@ -22,7 +22,7 @@ CREATE TABLE posts
     type varchar(255),
     location varchar(255),
     price int not null,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 ALTER TABLE posts AUTO_INCREMENT=2000000;
