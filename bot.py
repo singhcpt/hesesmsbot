@@ -36,12 +36,12 @@ def processByState(inputStr, user):
     return "Text #BUY or #SELL to buy or sell produce."
 
 def processText(inputStr, number):
-    if(bds.get_user_id(number) == None):
+    if(bds.get_user_id(number) == None and number not in users):
         return setup(number, None)
     if(isCommand(inputStr)):
-        return processCommand(inputStr[1:], bds.get_user(number))
+        return processCommand(inputStr[1:], users[number])
     #TODO State is not changed by a Command override currently 
-    return processByState(inputStr, bds.get_user(number))
+    return processByState(inputStr, users[number])
 
 def getUserInfo():
     return users
