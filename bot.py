@@ -38,6 +38,11 @@ def processByState(inputStr, user):
 def processText(inputStr, number):
     if(bds.get_user_id(number) == None and number not in users):
         return setup(number, None)
+    elif (number not in users):
+        users[number] = bds.get_user(number)
+
+    user = users[number]
+
     if(isCommand(inputStr)):
         return processCommand(inputStr[1:], users[number])
     #TODO State is not changed by a Command override currently 

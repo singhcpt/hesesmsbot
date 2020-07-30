@@ -52,7 +52,6 @@ def post(inputStr, user):
     elif(user.getCmdSubState() == 2):
         user.cache.setLocation(inputStr)
         user.setCmdSubState(3)
-        
         return REPORT_MESSAGE4
     elif(user.getCmdSubState() == 3):
         user.cache.setPrice(int(inputStr))
