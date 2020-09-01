@@ -24,4 +24,6 @@ class WeatherType(enum.Enum):
     Windy = 7
     Emergency = 8
 
+
+
     

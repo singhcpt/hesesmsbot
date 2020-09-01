@@ -56,7 +56,7 @@ def validate():
                 recentEvent = event
         for user in users.values():
             if(user.number not in get_users_verified(recentEvent.eventId) or ((user.baseLocation[0]-recentEvent.location[0])**2 + (user.baseLocation[1]-recentEvent.location[1])**2)**.5 < 0.00101035615 and user.verifyingEventId == -1):
-                msg = VALIDATE_MESSAGE + "\n\n" + str(recentEvent.weatherType) + "\n" + recentEvent.description + "\nReport Location: " + Utilities.createLinkFromCoords(recentEvent.location)
+                msg = VALIDATE_MESSAGE + "\n\n" + str(WeatherType(recentEvent.weatherType)) + "\n" + recentEvent.description + "\nReport Location: " + Utilities.createLinkFromCoords(recentEvent.location)
                 message = client.messages.create(body=msg, from_="+18604847971", to="+" + str(user.number))
                 user.cache.eventId = recentEvent.eventId
                 user.updateCmdState(CommandState.Verifying)
