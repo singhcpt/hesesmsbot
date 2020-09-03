@@ -12,6 +12,7 @@ from utilities import *
 
 # set up Flask to connect this code to the local host, which will
 # later be connected to the internet through Ngrok
+# change
 app = Flask(__name__)
     
 # Main method. When a POST request is sent to our local host through Ngrok 
