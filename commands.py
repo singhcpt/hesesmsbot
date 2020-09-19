@@ -1,9 +1,9 @@
-import bloomdataservices as bds
+import database.bloomdataservices as bds
 import time
-from user import *
-from post import *
-from strings import *
-from utilities import *
+from objects.user import *
+from objects.post import *
+from constants.strings import *
+from objects.utilities import *
 
 def setup(inputStr, user):
     if(user == None):
@@ -46,7 +46,7 @@ def post(inputStr, user):
         user.setCmdSubState(1)
         return REPORT_MESSAGE2
     elif(user.getCmdSubState() == 1):
-        user.cache.setKilograms(int(inputStr))
+        user.cache.setKilograms(float(inputStr))
         user.setCmdSubState(2)
         return REPORT_MESSAGE3
     elif(user.getCmdSubState() == 2):
@@ -68,26 +68,26 @@ def post(inputStr, user):
 def ls(inputStr, user):
     if(user.getCmdState() != CommandState.Browsing):
         user.updateCmdState(CommandState.Browsing)
-        user.setCmdSubState(0)
+        user.setCmdSubState(3)
         user.cache.clearCache()
         return LIST_MESSAGE1        
-    elif(user.getCmdSubState() == 0):
-        user.cache.setCrop(inputStr)  
-        user.setCmdSubState(1)
-        return LIST_MESSAGE2
-    elif(user.getCmdSubState() == 1):
-        user.cache.setLocation(inputStr)
-        user.setCmdSubState(2)
-        return LIST_MESSAGE3
-    elif(user.getCmdSubState() == 2):
-        user.cache.setKilograms(int(inputStr))
-        user.setCmdSubState(3)
-        return LIST_MESSAGE4
+    # elif(user.getCmdSubState() == 0):
+    #     user.cache.setCrop(inputStr)  
+    #     user.setCmdSubState(3)
+    #     return LIST_MESSAGE2
+    # elif(user.getCmdSubState() == 1):
+    #     user.cache.setLocation(inputStr)
+    #     user.setCmdSubState(2)
+    #     return LIST_MESSAGE3
+    # elif(user.getCmdSubState() == 2):
+    #     user.cache.setKilograms(int(inputStr))
+    #     user.setCmdSubState(3)
+    #     return LIST_MESSAGE4
     elif(user.getCmdSubState() == 3):
-        user.cache.setPrice(int(inputStr))
+        user.cache.setCrop(inputStr)
         user.setCmdSubState(4)
         
-        posts = bds.get_posts(user.cache.crop, user.cache.price, user.cache.location)
+        posts = bds.get_posts(user.cache.crop)
         
         post_string = ""
         post_count = 1
@@ -96,6 +96,10 @@ def ls(inputStr, user):
             post_string += "(" + str(post_count) + ") " + str(post) + "\n"
 
         return LIST_MESSAGE5 + "\n" + post_string
+    elif(user.getCmdSubState() == 4):
+        #update table and notify seller
+        user.updateCmdState(CommandState.Default)
+        return 'noted'
 
 def clear():
     events.clear()
