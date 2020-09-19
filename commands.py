@@ -68,26 +68,26 @@ def post(inputStr, user):
 def ls(inputStr, user):
     if(user.getCmdState() != CommandState.Browsing):
         user.updateCmdState(CommandState.Browsing)
-        user.setCmdSubState(0)
+        user.setCmdSubState(3)
         user.cache.clearCache()
         return LIST_MESSAGE1        
-    elif(user.getCmdSubState() == 0):
-        user.cache.setCrop(inputStr)  
-        user.setCmdSubState(1)
-        return LIST_MESSAGE2
-    elif(user.getCmdSubState() == 1):
-        user.cache.setLocation(inputStr)
-        user.setCmdSubState(2)
-        return LIST_MESSAGE3
-    elif(user.getCmdSubState() == 2):
-        user.cache.setKilograms(int(inputStr))
-        user.setCmdSubState(3)
-        return LIST_MESSAGE4
+    # elif(user.getCmdSubState() == 0):
+    #     user.cache.setCrop(inputStr)  
+    #     user.setCmdSubState(3)
+    #     return LIST_MESSAGE2
+    # elif(user.getCmdSubState() == 1):
+    #     user.cache.setLocation(inputStr)
+    #     user.setCmdSubState(2)
+    #     return LIST_MESSAGE3
+    # elif(user.getCmdSubState() == 2):
+    #     user.cache.setKilograms(int(inputStr))
+    #     user.setCmdSubState(3)
+    #     return LIST_MESSAGE4
     elif(user.getCmdSubState() == 3):
-        user.cache.setPrice(int(inputStr))
+        user.cache.setCrop(inputStr)
         user.setCmdSubState(4)
         
-        posts = bds.get_posts(user.cache.crop, user.cache.price, user.cache.location)
+        posts = bds.get_posts(user.cache.crop)
         
         post_string = ""
         post_count = 1

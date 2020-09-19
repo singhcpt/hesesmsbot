@@ -8,17 +8,17 @@ SETUP_MESSAGE3 = "What county are you located in?"
 
 SETUP_MESSAGE4 = "Thank you! You're all set up. If you want to buy produce, text #BUY, if you'd like to sell produce text #SELL."
 
-REPORT_MESSAGE1 = "What crop are you selling?"
+REPORT_MESSAGE1 = "What are you selling?"
 
 REPORT_MESSAGE2 = "How many kilograms of your crop are you selling?"
 
 REPORT_MESSAGE3 = "Where are you located?"
 
-REPORT_MESSAGE4 = "What is the price of your crops?"
+REPORT_MESSAGE4 = "What is the price of your crops in shillings?"
 
 REPORT_MESSAGE5 = "Thanks! Your crops have been posted. We will inform you when someone has purchased your crops."
 
-LIST_MESSAGE1 = "What crop are you looking for?"
+LIST_MESSAGE1 = "What are you looking for?"
 
 LIST_MESSAGE2 = "Where are you located?"
 

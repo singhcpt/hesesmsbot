@@ -127,3 +127,22 @@ def get_posts(type, max, location):
     
     return posts
 
+def get_posts(type):
+    getpostCnx = create_connection()
+    cursor = getpostCnx.cursor()
+    
+    get_posts = "SELECT * FROM Posts WHERE type = " + "\'" + type + "\'"
+    
+    print(get_posts)
+
+    cursor.execute(get_posts)
+ 
+    posts = []
+    for (post_id, user_id, quantity, type, location, price) in cursor:
+        newPost = Post(user_id, type, quantity, location, price)
+        posts.append(newPost)
+    
+    getpostCnx.close()
+    
+    return posts
+
