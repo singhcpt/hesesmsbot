@@ -1,9 +1,9 @@
 #Written Fore HESE 453 2020
 import time
-from user import *
-from utilities import *
+from objects.user import *
+from objects.utilities import *
 from commands import *
-import bloomdataservices as bds
+import database.bloomdataservices as bds
 #from algorithm import *
 
 def isCommand(inputStr):

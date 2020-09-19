@@ -1,7 +1,0 @@
-{
-  "user": "root",
-  "password": "password",
-  "host": "localhost",
-  "database": "bloomdb",
-  "port": 3306
-}

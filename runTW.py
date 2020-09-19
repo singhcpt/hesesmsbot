@@ -3,7 +3,7 @@ from flask import Flask, request
 from twilio.twiml.messaging_response import MessagingResponse
 
 from bot import *
-from strings import *
+from constants.strings import *
 
 # set up Flask to connect this code to the local host, which will
 # later be connected to the internet through Ngrok

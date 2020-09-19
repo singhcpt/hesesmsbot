@@ -1,9 +1,9 @@
-import bloomdataservices as bds
+import database.bloomdataservices as bds
 import time
-from user import *
-from post import *
-from strings import *
-from utilities import *
+from objects.user import *
+from objects.post import *
+from constants.strings import *
+from objects.utilities import *
 
 def setup(inputStr, user):
     if(user == None):
@@ -46,7 +46,7 @@ def post(inputStr, user):
         user.setCmdSubState(1)
         return REPORT_MESSAGE2
     elif(user.getCmdSubState() == 1):
-        user.cache.setKilograms(int(inputStr))
+        user.cache.setKilograms(float(inputStr))
         user.setCmdSubState(2)
         return REPORT_MESSAGE3
     elif(user.getCmdSubState() == 2):
@@ -96,6 +96,10 @@ def ls(inputStr, user):
             post_string += "(" + str(post_count) + ") " + str(post) + "\n"
 
         return LIST_MESSAGE5 + "\n" + post_string
+    elif(user.getCmdSubState() == 4):
+        #update table and notify seller
+        user.updateCmdState(CommandState.Default)
+        return 'noted'
 
 def clear():
     events.clear()
