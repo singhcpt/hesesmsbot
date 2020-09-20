@@ -18,7 +18,7 @@ CREATE TABLE posts
 (
     post_id int not null AUTO_INCREMENT PRIMARY KEY,
     user_id int not null,
-    quantity int not null,
+    quantity float not null,
     type varchar(255),
     location varchar(255),
     price int not null,

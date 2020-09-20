@@ -3,7 +3,8 @@ import time
 
 class Post: 
 
-    def __init__(self, user_id, type, quantity, location, price):
+    def __init__(self, post_id, user_id, type, quantity, location, price):
+        self.post_id = post_id
         self.user_id = user_id
         self.crop = type
         self.quantity = quantity

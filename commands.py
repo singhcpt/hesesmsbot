@@ -4,6 +4,7 @@ from objects.user import *
 from objects.post import *
 from constants.strings import *
 from objects.utilities import *
+from twilio.rest import Client
 
 def setup(inputStr, user):
     if(user == None):
@@ -57,7 +58,7 @@ def post(inputStr, user):
         user.cache.setPrice(int(inputStr))
         user.setCmdSubState(4)
         
-        newPost = Post(bds.get_user_id(user.number), user.cache.crop, user.cache.kilograms, user.cache.location, user.cache.price)
+        newPost = Post(0, bds.get_user_id(user.number), user.cache.crop, user.cache.kilograms, user.cache.location, user.cache.price)
         bds.create_post(newPost)
 
         user.updateCmdState(CommandState.Default)
@@ -80,14 +81,15 @@ def ls(inputStr, user):
     #     user.setCmdSubState(2)
     #     return LIST_MESSAGE3
     # elif(user.getCmdSubState() == 2):
-    #     user.cache.setKilograms(int(inputStr))
+    #     user.cache.setKilograms(float(inputStr))
     #     user.setCmdSubState(3)
     #     return LIST_MESSAGE4
     elif(user.getCmdSubState() == 3):
         user.cache.setCrop(inputStr)
         user.setCmdSubState(4)
         
-        posts = bds.get_posts(user.cache.crop)
+        posts = bds.get_posts_by_type(user.cache.crop)
+        user.cache.posts = posts.copy()
         
         post_string = ""
         post_count = 1
@@ -97,9 +99,42 @@ def ls(inputStr, user):
 
         return LIST_MESSAGE5 + "\n" + post_string
     elif(user.getCmdSubState() == 4):
+        if(inputStr.casefold() == "none"):
+            return LIST_MESSAGE6
+
+        postNum = int(inputStr)
+        if(postNum > len(user.cache.posts) or postNum < 1):
+            return LIST_ERRORMESSAGE5
+
+        selectedPost = user.cache.posts[postNum-1]
+        user.cache.posts = [selectedPost]
+
+        user.setCmdSubState(5)
+        return LIST_MESSAGE3
+
+    elif(user.getCmdSubState() == 5):
         #update table and notify seller
+        chosenPost = user.cache.posts[0]
+        amount = float(inputStr)
+
+        if(amount > chosenPost.quantity or amount < 0):
+            return "that amount is not available, please choose again"        
+
+        account_sid = 'AC50b76a11d713b405f2c1f4d120ed0d5e'
+        auth_token = 'dc825e2ecfdb217b99b85bbc210badba'
+        client = Client(account_sid, auth_token)
+
+        seller = bds.get_user_by_id(chosenPost.user_id)
+        msg = user.name + " has bought " + str(amount) + " kilograms of " + chosenPost.crop + "! location: " + user.county + "\nPayment should be made at pickup/dropoff"
+        message = client.messages.create(body=msg, from_="+18604847971", to="+" + str(seller.number))
+
+        if(chosenPost.quantity - amount < 1):
+            bds.delete_post(user.cache.posts[0].post_id)
+        else:
+            bds.update_post_quantity(chosenPost.post_id, chosenPost.quantity-amount)
+        
         user.updateCmdState(CommandState.Default)
-        return 'noted'
+        return LIST_MESSAGE7
 
 def clear():
     events.clear()

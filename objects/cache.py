@@ -5,6 +5,7 @@ class Cache:
         self.kilograms = -1
         self.location = ""
         self.price = 0
+        self.posts = list()
     
     def setCrop(self, crop):
         self.crop = crop

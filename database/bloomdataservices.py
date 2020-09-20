@@ -58,8 +58,21 @@ def get_user(number):
     cursor.execute(get_user)
 
     for (user_id, name, phone_number, rating, county, profession) in cursor:
-        newUser = User(name, phone_number, county, profession)
+        newUser = User(name, phone_number, rating, county, profession)
     
+    return newUser
+
+def get_user_by_id(id):
+    getUserCnx = create_connection()
+    cursor = getUserCnx.cursor()
+
+    get_user = "SELECT * FROM users WHERE user_id = " + str(id) + ";"
+
+    cursor.execute(get_user)
+
+    for (user_id, name, phone_number, rating, county, profession) in cursor:
+        newUser = User(name, phone_number, rating, county, profession)
+
     return newUser
 
 def create_post(post):
@@ -76,6 +89,19 @@ def create_post(post):
     postCnx.close()
    
     return  "Post " + str(post) + " created successfully."
+
+def delete_post(postId):
+    postCnx = create_connection()
+    cursor = postCnx.cursor()
+
+    delete_post = "DELETE FROM posts WHERE post_id = " + str(postId) + ";"
+
+    cursor.execute(delete_post)
+
+    postCnx.commit()
+    postCnx.close()
+
+    return "Post deleted successfully"
 
 def create_request(request):
     requestCnx = create_connection()
@@ -120,18 +146,18 @@ def get_posts(type, max, location):
  
     posts = []
     for (post_id, user_id, quantity, type, location, price) in cursor:
-        newPost = Post(user_id, type, quantity, location, price)
+        newPost = Post(post_id, user_id, type, quantity, location, price)
         posts.append(newPost)
     
     getpostCnx.close()
     
     return posts
 
-def get_posts(type):
+def get_posts_by_type(type):
     getpostCnx = create_connection()
     cursor = getpostCnx.cursor()
     
-    get_posts = "SELECT * FROM Posts WHERE type = " + "\'" + type + "\'"
+    get_posts = "SELECT * FROM Posts WHERE type = " + "\'" + type + "\';"
     
     print(get_posts)
 
@@ -139,10 +165,23 @@ def get_posts(type):
  
     posts = []
     for (post_id, user_id, quantity, type, location, price) in cursor:
-        newPost = Post(user_id, type, quantity, location, price)
+        newPost = Post(post_id, user_id, type, quantity, location, price)
         posts.append(newPost)
     
     getpostCnx.close()
     
     return posts
+
+def update_post_quantity(postId, amount):
+    cnx = create_connection()
+    cursor = cnx.cursor()
+
+    update_post_amount = "UPDATE posts SET quantity = " + str(amount) + " WHERE post_id = " + str(postId) + ";"
+
+    cursor.execute(update_post_amount)
+
+    cnx.commit()
+    cnx.close()
+
+    return "post updated successfully"
 
