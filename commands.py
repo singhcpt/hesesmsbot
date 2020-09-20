@@ -19,13 +19,18 @@ def setup(inputStr, user):
         user.setCmdSubState(1)
         return SETUP_MESSAGE2
     elif(user.getCmdSubState() == 1):
-        profession = int(inputStr)
+        profession = 0
+        try:
+            profession = int(inputStr)
+        except ValueError as e:
+            return SETUP_ERRORMESSAGE2
+
         if profession == 1:
             user.setProfession('buyer')
         elif profession == 2:
             user.setProfession('seller')
         else:
-            return SETUP_ERROR_MESSAGE2
+            return SETUP_ERRORMESSAGE2
         user.setCmdSubState(2)
         return SETUP_MESSAGE3
     elif(user.getCmdSubState() == 2):
@@ -47,6 +52,11 @@ def post(inputStr, user):
         user.setCmdSubState(1)
         return REPORT_MESSAGE2
     elif(user.getCmdSubState() == 1):
+        try:
+            float(inputStr)
+        except ValueError as e:
+            return "please only enter a number"
+
         user.cache.setKilograms(float(inputStr))
         user.setCmdSubState(2)
         return REPORT_MESSAGE3
@@ -55,6 +65,11 @@ def post(inputStr, user):
         user.setCmdSubState(3)
         return REPORT_MESSAGE4
     elif(user.getCmdSubState() == 3):
+        try:
+            int(inputStr)
+        except ValueError as e:
+            return "Please enter only a number."
+
         user.cache.setPrice(int(inputStr))
         user.setCmdSubState(4)
         
@@ -100,9 +115,15 @@ def ls(inputStr, user):
         return LIST_MESSAGE5 + "\n" + post_string
     elif(user.getCmdSubState() == 4):
         if(inputStr.casefold() == "none"):
+            user.updateCmdState(CommandState.Default)
             return LIST_MESSAGE6
 
-        postNum = int(inputStr)
+        postNum = 0
+        try:
+            postNum = int(inputStr)
+        except ValueError as e:
+            return LIST_ERRORMESSAGE5
+        
         if(postNum > len(user.cache.posts) or postNum < 1):
             return LIST_ERRORMESSAGE5
 
@@ -115,13 +136,17 @@ def ls(inputStr, user):
     elif(user.getCmdSubState() == 5):
         #update table and notify seller
         chosenPost = user.cache.posts[0]
-        amount = float(inputStr)
+        amount = 0
+        try:
+            amount = float(inputStr)
+        except ValueError as e:
+            return "please enter as only a number"
 
         if(amount > chosenPost.quantity or amount < 0):
             return "that amount is not available, please choose again"        
 
         account_sid = 'AC50b76a11d713b405f2c1f4d120ed0d5e'
-        auth_token = 'dc825e2ecfdb217b99b85bbc210badba'
+        auth_token = '713a0a523ee484949c56164b944156f0'
         client = Client(account_sid, auth_token)
 
         seller = bds.get_user_by_id(chosenPost.user_id)
