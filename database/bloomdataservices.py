@@ -80,7 +80,7 @@ def create_post(post):
     cursor = postCnx.cursor()
     
     print(post.type, post.subType)
-    create_post = "INSERT INTO Posts (user_id, quantity, title, type, sub_type, location, price) \
+    create_post = "INSERT INTO posts (user_id, quantity, title, type, sub_type, location, price) \
     VALUES (" + str(post.user_id) + "," + str(post.quantity) + ",\'" + \
         post.title + "\',"  + str(post.type.value) + "," + str(post.subType.value) + ",\'" + str(post.location) + "\'," + str(post.price) + ");"
 
@@ -108,7 +108,7 @@ def create_request(request):
     requestCnx = create_connection()
     cursor = requestCnx.cursor()
     
-    create_request = "INSERT INTO Requests (user_id, request_id, quantity, type, location, price) \
+    create_request = "INSERT INTO requests (user_id, request_id, quantity, type, location, price) \
     VALUES (\'" + str(request.user_id) + "\',\'" + str(request.request_id) + "\',\'" + str(request.quantity) + "\'," + \
         request.type + "," + str(request.location) + "," + str(request.price) + ");"
     
@@ -123,7 +123,7 @@ def create_transaction(transaction):
     transactionCnx = create_connection()
     cursor = transactionCnx.cursor()
     
-    create_transaction = "INSERT INTO Transactions (post_id, request_id, review) \
+    create_transaction = "INSERT INTO transactions (post_id, request_id, review) \
     VALUES (\'" + str(transaction.post_id) + "\',\'" + str(transaction.request_id) + "\',\'" + str(transaction.review) + ");"
     
     cursor.execute(create_transaction)
@@ -158,7 +158,7 @@ def get_posts_by_title(title):
     getpostCnx = create_connection()
     cursor = getpostCnx.cursor()
     
-    get_posts = "SELECT * FROM Posts WHERE title = " + "\'" + title + "\';"
+    get_posts = "SELECT * FROM posts WHERE title = " + "\'" + title + "\';"
     
     print(get_posts)
 
@@ -177,7 +177,7 @@ def get_posts_by_subtype(type, subtype):
     getpostCnx = create_connection()
     cursor = getpostCnx.cursor()
     
-    get_posts = "SELECT * FROM Posts WHERE type = " + str(type.value) + " AND sub_type = " + str(subtype.value) + ";"
+    get_posts = "SELECT * FROM posts WHERE type = " + str(type.value) + " AND sub_type = " + str(subtype.value) + ";"
     
     print(get_posts)
 
