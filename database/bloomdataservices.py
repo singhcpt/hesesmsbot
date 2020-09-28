@@ -79,9 +79,10 @@ def create_post(post):
     postCnx = create_connection()
     cursor = postCnx.cursor()
     
-    create_post = "INSERT INTO Posts (user_id, quantity, type, location, price) \
+    print(post.type, post.subType)
+    create_post = "INSERT INTO Posts (user_id, quantity, title, type, sub_type, location, price) \
     VALUES (" + str(post.user_id) + "," + str(post.quantity) + ",\'" + \
-        post.crop + "\',\'" + str(post.location) + "\'," + str(post.price) + ");"
+        post.title + "\',"  + str(post.type.value) + "," + str(post.subType.value) + ",\'" + str(post.location) + "\'," + str(post.price) + ");"
 
     cursor.execute(create_post)
     
@@ -145,27 +146,46 @@ def get_posts(type, max, location):
     cursor.execute(get_posts)
  
     posts = []
-    for (post_id, user_id, quantity, type, location, price) in cursor:
-        newPost = Post(post_id, user_id, type, quantity, location, price)
+    for (post_id, user_id, quantity, title, type, sub_type, location, price) in cursor:
+        newPost = Post(post_id, user_id, title, type, sub_type, quantity, location, price)
         posts.append(newPost)
     
     getpostCnx.close()
     
     return posts
 
-def get_posts_by_type(type):
+def get_posts_by_title(title):
     getpostCnx = create_connection()
     cursor = getpostCnx.cursor()
     
-    get_posts = "SELECT * FROM Posts WHERE type = " + "\'" + type + "\';"
+    get_posts = "SELECT * FROM Posts WHERE title = " + "\'" + title + "\';"
     
     print(get_posts)
 
     cursor.execute(get_posts)
  
     posts = []
-    for (post_id, user_id, quantity, type, location, price) in cursor:
-        newPost = Post(post_id, user_id, type, quantity, location, price)
+    for (post_id, user_id, quantity, title, type, subType, location, price) in cursor:
+        newPost = Post(post_id, user_id, title, type, subType, quantity, location, price)
+        posts.append(newPost)
+    
+    getpostCnx.close()
+    
+    return posts
+
+def get_posts_by_subtype(type, subtype):
+    getpostCnx = create_connection()
+    cursor = getpostCnx.cursor()
+    
+    get_posts = "SELECT * FROM Posts WHERE type = " + str(type.value) + " AND sub_type = " + str(subtype.value) + ";"
+    
+    print(get_posts)
+
+    cursor.execute(get_posts)
+ 
+    posts = []
+    for (post_id, user_id, quantity, title, type, subType, location, price) in cursor:
+        newPost = Post(post_id, user_id, title, type, subType, quantity, location, price)
         posts.append(newPost)
     
     getpostCnx.close()

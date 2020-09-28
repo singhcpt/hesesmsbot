@@ -19,7 +19,7 @@ def sms():
     i = number.find("+")
     number = number[i+1:]
 
-    print(request.form.to_dict())
+    #print(request.form.to_dict())
     
     # Create a Twilio response object to be able to send a reply back (as per         # Twilio docs)
     resp = MessagingResponse()

@@ -19,7 +19,9 @@ CREATE TABLE posts
     post_id int not null AUTO_INCREMENT PRIMARY KEY,
     user_id int not null,
     quantity float not null,
-    type varchar(255),
+    title varchar(255),
+    type int,
+    sub_type int,
     location varchar(255),
     price int not null,
     FOREIGN KEY (user_id) REFERENCES users(user_id)

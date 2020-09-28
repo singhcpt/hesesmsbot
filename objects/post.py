@@ -3,16 +3,22 @@ import time
 
 class Post: 
 
-    def __init__(self, post_id, user_id, type, quantity, location, price):
+    def __init__(self, post_id, user_id, title, type, subType, quantity, location, price):
         self.post_id = post_id
         self.user_id = user_id
-        self.crop = type
+        self.title = title
+        self.type = type
+        self.subType = subType
         self.quantity = quantity
         self.location = location
         self.price = price
 
-    def setCrop(self, crop):
-        self.crop = crop
+    def setTitle(self, title):
+        self.title = title
+        return
+
+    def setType(self, typ):
+        self.type = typ
         return
 
     def setQuantity(self, quantity):
@@ -28,7 +34,7 @@ class Post:
         return 
 
     def __str__(self):
-        return "Crop: " + self.crop + " | Quantity: " + str(self.quantity) + " kgs | Location: " + self.location + " | Price: " + str(self.price) + " sh "
+        return "Item: " + self.title + " | Quantity: " + str(self.quantity) + " Units | Location: " + self.location + " | Price: " + str(self.price) + " sh "
     
     __repr__=__str__
         
