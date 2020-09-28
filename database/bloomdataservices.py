@@ -18,7 +18,7 @@ def create_user(user):
     
     cursor = userCnx.cursor()
     
-    create_user = "INSERT INTO Users (name, phone_number, rating, county, profession) \
+    create_user = "INSERT INTO users (name, phone_number, rating, county, profession) \
         VALUES (\'" + user.name + "\'," + str(user.number) + "," + str(user.reliability) + ",\'" + user.county \
             + "\',\'" + user.profession + "\');"
 
