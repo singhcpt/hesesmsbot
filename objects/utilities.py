@@ -34,6 +34,7 @@ class Utilities:
 
         for post in posts:
             post_string += "(" + str(post_count) + ") " + str(post) + "\n"
+            post_count += 1
 
         return post_string
         
