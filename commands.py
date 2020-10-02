@@ -240,7 +240,7 @@ def ls(inputStr, user):
             bds.update_post_quantity(chosenPost.post_id, chosenPost.quantity-amount)
         
         user.updateCmdState(CommandState.Default)
-        return LIST_MESSAGE7 + "\nTotal price is " + str(chosenPost.price*amount) + "KES"
+        return LIST_MESSAGE7 + "\nTotal price is " + str(chosenPost.price*amount) + " KES"
 
 def clear():
     events.clear()
