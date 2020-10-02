@@ -227,7 +227,7 @@ def ls(inputStr, user):
             return "that amount is not available, please choose again"        
 
         account_sid = 'AC50b76a11d713b405f2c1f4d120ed0d5e'
-        auth_token = 'a5d03525f4302c1a0e1bc19f9d7c320c'
+        auth_token = 'update locally'
         client = Client(account_sid, auth_token)
 
         seller = bds.get_user_by_id(chosenPost.user_id)
