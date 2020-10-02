@@ -231,7 +231,7 @@ def ls(inputStr, user):
         client = Client(account_sid, auth_token)
 
         seller = bds.get_user_by_id(chosenPost.user_id)
-        msg = user.name + " has bought " + str(amount) + " units of " + chosenPost.title + "! location: " + user.county + "\nPayment should be made at pickup/dropoff"
+        msg = user.name + " has bought " + str(amount) + " units of " + chosenPost.title + "! location: " + user.county + "\nTotal Price is " + str(chosenPost.price*amount) + " KES\nPayment should be made at pickup/dropoff"
         message = client.messages.create(body=msg, from_="+18604847971", to="+" + str(seller.number))
 
         if(chosenPost.quantity - amount < 1):
@@ -240,7 +240,7 @@ def ls(inputStr, user):
             bds.update_post_quantity(chosenPost.post_id, chosenPost.quantity-amount)
         
         user.updateCmdState(CommandState.Default)
-        return LIST_MESSAGE7
+        return LIST_MESSAGE7 + "Total price is " + str(chosenPost.price*amount) + "KES"
 
 def clear():
     events.clear()
