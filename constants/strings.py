@@ -6,19 +6,19 @@ SETUP_ERRORMESSAGE2 = "Please respond with 1 or 2."
 
 SETUP_MESSAGE3 = "What county are you located in?"
 
-SETUP_MESSAGE4 = "Thank you! You're all set up. If you want to buy produce, text #BUY, if you'd like to sell produce text #SELL."
+SETUP_MESSAGE4 = "Thank you! You're all set up. If you want to buy, text #BUY, if you'd like to sell, text #SELL."
 
 REPORT_MESSAGE1 = "What are you selling? (ex 1 box of Potatoes or 100kg of rice)"
 
-TYPE_MESSAGE = "What catagory does it fall under? enter just the number\n(1) Food     (4) Bedding\n(2) Clothes  (5) Other\n(3) Footwear"
+TYPE_MESSAGE = "What category does it fall under? enter just the number\n(1) Food     (4) Bedding\n(2) Clothes  (5) Other\n(3) Footwear"
 
-SUBTYPE_FOOD = "What subcatagory?\n(1) Beverages  (5) Dry Goods\n(2) Bakery    (6) Frozen Food\n(3) Canned Food  (7) Produce\n(4) Dairy     (8) Other"
+SUBTYPE_FOOD = "What subcategory?\n(1) Beverages  (5) Dry Goods\n(2) Bakery    (6) Frozen Food\n(3) Canned Food  (7) Produce\n(4) Dairy     (8) Other"
 
-SUBTYPE_CLOTHES = "What subcatagory?\n(1) Office   (3) Child\n(2) Casual"
+SUBTYPE_CLOTHES = "What subcategory?\n(1) Office   (3) Child\n(2) Casual"
 
-SUBTYPE_FOOTWEAR = "What subcatagory?\n(1) Adult    (2) Child"
+SUBTYPE_FOOTWEAR = "What subcategory?\n(1) Adult    (2) Child"
 
-SUBTYPE_BEDDING = "What subcatagory?\n(1) Bedsheets  (3) Pillowcases\n(2) Bedcovers"
+SUBTYPE_BEDDING = "What subcategory?\n(1) Bedsheets  (3) Pillowcases\n(2) Bedcovers"
 
 REPORT_MESSAGE2 = "How many units of that do you have?"
 

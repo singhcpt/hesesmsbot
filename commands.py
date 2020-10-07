@@ -149,7 +149,10 @@ def ls(inputStr, user):
         except ValueError as e:
             return "please only enter a number"
         
-        user.cache.setType(ProductType(inValue))
+        try:
+            user.cache.setType(ProductType(inValue))
+        except ValueError as e:
+            return "please choose a listed number"
         
         if (inValue == 1):
             user.setCmdSubState(2)
@@ -165,7 +168,7 @@ def ls(inputStr, user):
             return SUBTYPE_BEDDING
         elif (inValue == 5):
             user.setCmdSubState(3)
-            return Utilities.createListingString(user.cache.productType, user.cache.subType, user.cache.crop, user)
+            return Utilities.createListingString(user.cache.productType, FoodType.Other, user.cache.crop, user)
         else:
             return "pick a listed number"
 

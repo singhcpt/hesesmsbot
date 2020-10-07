@@ -25,6 +25,8 @@ def processCommand(commandStr, user):
         return ls("", user)
     elif(commandStr[:end].casefold() == "clear" or commandStr[:end].casefold() == "c"):
         return clear()
+    else:
+        return "Text #BUY or #SELL to buy or sell produce."
 
 def processByState(inputStr, user):
     if(user.getCmdState() == CommandState.Setup):
