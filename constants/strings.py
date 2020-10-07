@@ -12,7 +12,7 @@ REPORT_MESSAGE1 = "What are you selling? (ex 1 box of Potatoes or 100kg of rice)
 
 TYPE_MESSAGE = "What category does it fall under? enter just the number\n(1) Food     (4) Bedding\n(2) Clothes  (5) Other\n(3) Footwear"
 
-SUBTYPE_FOOD = "What subcategory?\n(1) Beverages  (5) Dry Goods\n(2) Bakery    (6) Frozen Food\n(3) Canned Food  (7) Produce\n(4) Dairy     (8) Other"
+SUBTYPE_FOOD = "What subcategory?\n(1) Beverages  (5) Dry Goods\n(2) Bakery   (6) Frozen Food\n(3) Canned  (7) Produce\n(4) Dairy    (8) Other"
 
 SUBTYPE_CLOTHES = "What subcategory?\n(1) Office   (3) Child\n(2) Casual"
 
