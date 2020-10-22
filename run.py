@@ -12,9 +12,9 @@ app = Flask(__name__)
 class SMS:
     def __init__(self):
     		# Set your app credentials
-        self.username = "sandbox"
-        self.api_key = "cd971aefc05f7ae634e29e7f92400318b98b93c1ef4cd60da7566f1235b40660"
-        # self.api_key = "fd3df98128192a78ec05c50d6ca1c09e88e5a6a09b2a5308a9f3390dac9e21e7"
+        self.username = "BloomPT1"
+        self.api_key = "2a9881d191b117d93a7da2dbaf738f705d6280a1fb2b9fcdb9c634c2e83cb84e"
+        #self.api_key = "143eab860f6abdb935e855b402348cd6698fb562e5f67313a2fc85ac94698d61"
 
 		# Initialize the SDK
         africastalking.initialize(self.username, self.api_key)
@@ -35,13 +35,7 @@ def sms():
 
     recipients = ["+" + number]
     replyText = processText(message_body, int(number))
-    #whatsapp only
-    if(replyText == REPORT_MESSAGE4):
-        if("Latitude" in request.form.keys()):
-            setLocation(request.form.get("Latitude"), request.form.get("Longitude"), int(number))
-        else:
-            replyText = "Location Error"
-    shortCode = "3256"
+    shortCode = "22384"
     
 
 

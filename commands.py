@@ -4,7 +4,7 @@ from objects.user import *
 from objects.post import *
 from constants.strings import *
 from objects.utilities import *
-from twilio.rest import Client
+import africastalking
 
 def setup(inputStr, user):
     if(user == None):
@@ -229,13 +229,14 @@ def ls(inputStr, user):
         if(amount > chosenPost.quantity or amount < 0):
             return "that amount is not available, please choose again"        
 
-        account_sid = 'AC50b76a11d713b405f2c1f4d120ed0d5e'
-        auth_token = 'update locally'
-        client = Client(account_sid, auth_token)
+        username = "BloomPT1"
+        #api_key = "143eab860f6abdb935e855b402348cd6698fb562e5f67313a2fc85ac94698d61"
+        api_key = "2a9881d191b117d93a7da2dbaf738f705d6280a1fb2b9fcdb9c634c2e83cb84e"
+        africastalking.initialize(username, api_key)
 
         seller = bds.get_user_by_id(chosenPost.user_id)
         msg = user.name + " has bought " + str(amount) + " units of " + chosenPost.title + "! location: " + user.county + "\nTotal Price is " + str(chosenPost.price*amount) + " KES\nPayment should be made at pickup/dropoff"
-        message = client.messages.create(body=msg, from_="+18604847971", to="+" + str(seller.number))
+        africastalking.SMS.send(msg, ["+" + str(seller.number)], "22384")
 
         if(chosenPost.quantity - amount < 1):
             bds.delete_post(user.cache.posts[0].post_id)
