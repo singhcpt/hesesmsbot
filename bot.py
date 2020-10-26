@@ -45,6 +45,9 @@ def processText(inputStr, number):
 
     user = users[number]
 
+    #chop off Bloom that AT adds to the beginning of the string
+    inputStr = inputStr[6:]
+
     if(isCommand(inputStr)):
         return processCommand(inputStr[1:], users[number])
     #TODO State is not changed by a Command override currently 
