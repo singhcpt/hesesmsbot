@@ -1,14 +1,14 @@
-NEW_USER_MESSAGE = "Hello! This is the first time we have seen your number. We'll need to do some setup. First, what is your name?"
+NEW_USER_MESSAGE = "Hello! This is the first time we have seen your number. Please note you need to put 'Bloom' before each response (e.g. Bloom My Name, Bloom 1). We'll need to do some setup. First, what is your name?"
 
-SETUP_MESSAGE2 = "Are you a buyer or a seller? Respond with 1 for buyer, 2 for seller."
+SETUP_MESSAGE2 = "Are you a buyer or a seller? Respond with Bloom 1 for buyer, Bloom 2 for seller."
 
 SETUP_ERRORMESSAGE2 = "Please respond with 1 or 2."
 
 SETUP_MESSAGE3 = "What county are you located in?"
 
-SETUP_MESSAGE4 = "Thank you! You're all set up. If you want to buy, text #BUY, if you'd like to sell, text #SELL."
+SETUP_MESSAGE4 = "Thank you! You're all set up. If you want to buy, text Bloom #BUY, if you'd like to sell, text Bloom #SELL."
 
-REPORT_MESSAGE1 = "What are you selling? (ex 1 box of Potatoes or 100kg of rice)"
+REPORT_MESSAGE1 = "What are you selling? (ex 10kg of Potatoes)\nnote: include the units in the title then if someone wants more they can buy many \"10kg of potatoes\""
 
 TYPE_MESSAGE = "What category does it fall under? enter just the number\n(1) Food     (4) Bedding\n(2) Clothes  (5) Other\n(3) Footwear"
 
@@ -20,9 +20,9 @@ SUBTYPE_FOOTWEAR = "What subcategory?\n(1) Adult    (2) Child"
 
 SUBTYPE_BEDDING = "What subcategory?\n(1) Bedsheets  (3) Pillowcases\n(2) Bedcovers"
 
-REPORT_MESSAGE2 = "How many units of that do you have?"
+REPORT_MESSAGE2 = "How many units of that do you have? (if your title was \"12 ears of corn\" and you have 120 ears of corn you would have 10 units)"
 
-REPORT_MESSAGE3 = "Where are you located?"
+REPORT_MESSAGE3 = "Where are you located? (name of store is sufficient)"
 
 REPORT_MESSAGE4 = "What is the price in shillings?"
 

@@ -55,7 +55,7 @@ def post(inputStr, user):
         try:
             float(inputStr)
         except ValueError as e:
-            return "please only enter a number"
+            return "please enter Bloom followed by a number"
 
         user.cache.setKilograms(float(inputStr))
         user.setCmdSubState(2)
@@ -65,7 +65,7 @@ def post(inputStr, user):
         try:
             inValue = int(inputStr)
         except ValueError as e:
-            return "please only enter a number"
+            return "please enter Bloom followed by a number"
         
         user.cache.setType(ProductType(inValue))
         
@@ -93,7 +93,7 @@ def post(inputStr, user):
         try:
             inValue = int(inputStr)
         except ValueError as e:
-            return "please only enter a number"
+            return "please enter Bloom followed by a number"
 
         typ = user.cache.productType
         try:
@@ -120,7 +120,7 @@ def post(inputStr, user):
         try:
             int(inputStr)
         except ValueError as e:
-            return "Please enter only a number."
+            return "please enter Bloom followed by a number"
 
         user.cache.setPrice(int(inputStr))
         
@@ -147,7 +147,7 @@ def ls(inputStr, user):
         try:
             inValue = int(inputStr)
         except ValueError as e:
-            return "please only enter a number"
+            return "please enter Bloom followed by a number"
         
         try:
             user.cache.setType(ProductType(inValue))
@@ -170,14 +170,14 @@ def ls(inputStr, user):
             user.setCmdSubState(3)
             return Utilities.createListingString(user.cache.productType, FoodType.Other, user.cache.crop, user)
         else:
-            return "pick a listed number"
+            return "please pick a listed number"
 
     elif(user.getCmdSubState() == 2):
         inValue = -1
         try:
             inValue = int(inputStr)
         except ValueError as e:
-            return "please only enter a number"
+            return "please enter Bloom followed by a number"
 
         typ = user.cache.productType
         try:
@@ -224,7 +224,7 @@ def ls(inputStr, user):
         try:
             amount = float(inputStr)
         except ValueError as e:
-            return "please enter as only a number"
+            return "please enter Bloom followed by a number"
 
         if(amount > chosenPost.quantity or amount < 0):
             return "that amount is not available, please choose again"        
