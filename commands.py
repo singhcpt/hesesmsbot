@@ -231,7 +231,7 @@ def ls(inputStr, user):
 
         username = "BloomPT1"
         #api_key = "143eab860f6abdb935e855b402348cd6698fb562e5f67313a2fc85ac94698d61"
-        api_key = "2a9881d191b117d93a7da2dbaf738f705d6280a1fb2b9fcdb9c634c2e83cb84e"
+        api_key = "60529f7fc8cb78903800f71b921ad61749b7b0be9dc2d745bd67837be4783bd6"
         africastalking.initialize(username, api_key)
 
         seller = bds.get_user_by_id(chosenPost.user_id)

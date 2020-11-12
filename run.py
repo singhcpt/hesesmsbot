@@ -13,7 +13,7 @@ class SMS:
     def __init__(self):
     		# Set your app credentials
         self.username = "BloomPT1"
-        self.api_key = "2a9881d191b117d93a7da2dbaf738f705d6280a1fb2b9fcdb9c634c2e83cb84e"
+        self.api_key = "60529f7fc8cb78903800f71b921ad61749b7b0be9dc2d745bd67837be4783bd6"
         #self.api_key = "143eab860f6abdb935e855b402348cd6698fb562e5f67313a2fc85ac94698d61"
 
 		# Initialize the SDK
@@ -37,10 +37,11 @@ def sms():
     replyText = processText(message_body, int(number))
     shortCode = "22384"
     
-
+    print(replyText)
 
     service = SMS()
-    service.sms.send(replyText, recipients, shortCode)
+    response = service.sms.send(replyText, recipients, shortCode)
+    print(response)
     return str(replyText)
 	
 # when you run the code through terminal, this will allow Flask to work
